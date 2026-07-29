@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 955151110}
   - component: {fileID: 955151109}
   - component: {fileID: 955151108}
+  - component: {fileID: 955151112}
   - component: {fileID: 955151107}
   m_Layer: 0
   m_Name: Capsule
@@ -151,8 +152,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca543140bbd67c49b65884e023faa37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 100
+  speed: 10
   mouseSensitivity: 2
+  jump:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 14b9e99e-05f4-4aa0-9670-6d2243d3b15d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 638142e6-4ae4-4afd-b271-04e10f585bd9
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    m_Flags: 0
+  jumpForce: 20
 --- !u!136 &955151108
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -242,12 +261,39 @@ Transform:
   m_GameObject: {fileID: 955151106}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35355, y: 1.3, z: 0.35355}
+  m_LocalPosition: {x: 0.35355, y: 1, z: 0.35355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &955151112
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955151106}
+  serializedVersion: 5
+  m_Mass: 5
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1195531888
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +494,7 @@ Transform:
   m_GameObject: {fileID: 1215162938}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21895689, y: 2.2955142e-29, z: -5.1511818e-30, w: 0.97573453}
-  m_LocalPosition: {x: 0.35355, y: 4.75, z: -6.94645}
+  m_LocalPosition: {x: 0.35355, y: 4.45, z: -6.94645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -993,6 +1039,8 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
         Gain: 1
+        LegacyInput: 
+        LegacyGain: 1
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -1004,6 +1052,8 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
         Gain: -1
+        LegacyInput: 
+        LegacyGain: 1
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -1015,6 +1065,8 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: -423771258819551211, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
         Gain: -1
+        LegacyInput: 
+        LegacyGain: 1
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -1183,7 +1235,7 @@ Transform:
   m_GameObject: {fileID: 2144163910}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21895687, y: 2.3807108e-29, z: -8.947795e-30, w: 0.9757346}
-  m_LocalPosition: {x: 0.35355, y: 4.75, z: -6.94645}
+  m_LocalPosition: {x: 0.35355, y: 4.45, z: -6.94645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class player_mvt : MonoBehaviour
 {
@@ -35,4 +36,36 @@ public class player_mvt : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, rotationY, 0f);
     }
+
+//jump control
+
+    [SerializeField]
+    InputAction jump;
+
+    [SerializeField]
+    float jumpForce = 5f;
+
+    Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnEnable()
+    {
+        jump.Enable();
+    }
+
+    private void FixedUpdate()
+    {
+       if (jump.IsPressed())
+        {
+             if (gameObject.transform.position.y < 1.2f)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+    }
+        }
+
 }
