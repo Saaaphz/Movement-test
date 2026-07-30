@@ -248,8 +248,10 @@ GameObject:
   - component: {fileID: 955151108}
   - component: {fileID: 955151112}
   - component: {fileID: 955151107}
+  - component: {fileID: 955151113}
+  - component: {fileID: 955151114}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,26 +269,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca543140bbd67c49b65884e023faa37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 10
+  rb: {fileID: 0}
+  moveSpeed: 5
+  _moveInput: {x: 0, y: 0, z: 0}
   mouseSensitivity: 2
-  jump:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 14b9e99e-05f4-4aa0-9670-6d2243d3b15d
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 638142e6-4ae4-4afd-b271-04e10f585bd9
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Jump
-      m_Flags: 0
-    m_Flags: 0
-  jumpForce: 20
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheckDistance: 0.88
 --- !u!136 &955151108
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -379,7 +369,8 @@ Transform:
   m_LocalPosition: {x: 0.35355, y: 1, z: 0.35355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2144163916}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &955151112
@@ -409,6 +400,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &955151113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955151106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a208324de14053b4c8eb8cf73a28e25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  jump: {x: 0, y: 2, z: 0}
+  jumpForce: 20
+  isGrounded: 0
+--- !u!114 &955151114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955151106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e01755e5eebcf48a09f14e2e3dc3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1195531888
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,8 +439,8 @@ GameObject:
   - component: {fileID: 1195531891}
   - component: {fileID: 1195531890}
   - component: {fileID: 1195531889}
-  m_Layer: 0
-  m_Name: Plane
+  m_Layer: 6
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,8 +533,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195531888}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -534,6 +552,7 @@ GameObject:
   - component: {fileID: 1215162940}
   - component: {fileID: 1215162939}
   - component: {fileID: 1215162942}
+  - component: {fileID: 1215162943}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -647,6 +666,50 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &1215162943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215162938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1498150037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1188,7 @@ GameObject:
   - component: {fileID: 2144163912}
   - component: {fileID: 2144163911}
   m_Layer: 0
-  m_Name: FreeLook Camera
+  m_Name: Player Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1350,21 +1413,20 @@ Transform:
   m_GameObject: {fileID: 2144163910}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21895687, y: 2.3807108e-29, z: -8.947795e-30, w: 0.9757346}
-  m_LocalPosition: {x: 0.35355, y: 4.45, z: -6.94645}
+  m_LocalPosition: {x: 0, y: 3.4499998, z: -7.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 955151111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1215162941}
-  - {fileID: 1979145962}
   - {fileID: 1195531892}
+  - {fileID: 1979145962}
   - {fileID: 955151111}
-  - {fileID: 2144163916}
   - {fileID: 1532254793}
   - {fileID: 1498150041}
   - {fileID: 1922584728}
