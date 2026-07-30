@@ -2,16 +2,25 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
+    public GameObject pickupEffect;
+
+    public float multiplier = 1.4f;
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Pickup();
+            Pickup(other);
         }
     }
 
-    void Pickup()
+    void Pickup(Collider player)
     {
-        Debug.Log("Powerup picked up!");
+        Instantiate(pickupEffect, transform.position, transform.rotation);
+
+        player.transform.localScale *= multiplier;
+
+        Destroy(gameObject, 0.1f);
+        Destroy(pickupEffect, 1f);
     }
 }
