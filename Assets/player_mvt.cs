@@ -3,22 +3,35 @@ using UnityEngine.InputSystem;
 
 public class player_mvt : MonoBehaviour
 {
+    
+    [Header("References")]
+    public Rigidbody rb;
+
     [SerializeField]
-    private float speed = 5f;
+    public float moveSpeed = 5f;
+
+    [SerializeField]
+    Vector3 _moveInput;
 
     [SerializeField]
     private float mouseSensitivity = 2f;
-
     private Vector3 moveDirection;
     private float rotationY;
+
+    [Header("Collision Info")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckDistance;
+    private bool isGrounded;
+
+
 
     // Update is called once per frame
     void Update()
     {
         HandleMovement();
         HandleRotation();
-    }
 
+    }
     private void HandleMovement()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -26,7 +39,7 @@ public class player_mvt : MonoBehaviour
 
         moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
 
-        transform.Translate(moveDirection * speed * Time.deltaTime);
+        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
     }
 
     private void HandleRotation()
@@ -39,33 +52,11 @@ public class player_mvt : MonoBehaviour
 
 //jump control
 
-    [SerializeField]
-    InputAction jump;
-
-    [SerializeField]
-    float jumpForce = 5f;
-
-    Rigidbody rb;
-
-    private void Start()
+     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void OnEnable()
-    {
-        jump.Enable();
-    }
-
-    private void FixedUpdate()
-    {
-       if (jump.IsPressed())
-        {
-             if (gameObject.transform.position.y < 1.2f)
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
-    }
-        }
-
 }
+
+  
