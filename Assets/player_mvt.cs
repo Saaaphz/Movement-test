@@ -5,11 +5,13 @@ public class player_mvt : MonoBehaviour
 {
     
     [Header("Movement")]
-   
-    public float moveSpeed = 5f;
+    private float moveSpeed = 5f;
+    public float walkSpeed;
+    public float sprintSpeed;
 
     public float groundDrag;
 
+    [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -17,6 +19,7 @@ public class player_mvt : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
     public float PlayerHeight;
@@ -30,14 +33,23 @@ public class player_mvt : MonoBehaviour
 
     Vector3 moveDirection;
 
-    Rigidbody rb; //fix rigidbody
+    Rigidbody rb;
+
+    public MovementState state;
+
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        air
+    }
 
 
 //jump control
 
      private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInParent<Rigidbody>();
         rb.freezeRotation = true;
 
         readyToJump = true;
@@ -51,7 +63,8 @@ public class player_mvt : MonoBehaviour
         
         MyInput();
         SpeedControl();
-
+        StateHandler();
+        
         //handle drag
         if (grounded)
             rb.linearDamping = groundDrag;
@@ -84,8 +97,6 @@ public class player_mvt : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-
         //on ground
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
@@ -97,14 +108,15 @@ public class player_mvt : MonoBehaviour
 
     private void SpeedControl ()
     {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        Vector3 move = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        //limit velocity if needed
-        if(flatVel.magnitude > moveSpeed)
+                //limit velocity if needed
+        if(move.magnitude > moveSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = move.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
+
     }
 
 
@@ -121,5 +133,33 @@ public class player_mvt : MonoBehaviour
     {
         readyToJump = true;
     }
+
+//State handler
+
+    private void StateHandler()
+    {
+        //mode - sprinting
+        if(grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            moveSpeed = sprintSpeed;
+        }
+
+        //mode - walking
+        else if(grounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkSpeed;
+        }
+
+        //mode - air
+        else
+        {
+            state = MovementState.air;
+        }
+    }
+
+
+
 
 }

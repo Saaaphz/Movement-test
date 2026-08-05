@@ -304,7 +304,6 @@ GameObject:
   - component: {fileID: 955151109}
   - component: {fileID: 955151108}
   - component: {fileID: 955151112}
-  - component: {fileID: 955151113}
   m_Layer: 0
   m_Name: Player Object
   m_TagString: Player
@@ -347,7 +346,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
+  m_MotionVectors: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
@@ -391,7 +390,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955151106}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5495902117074765545, guid: 16718144e193c294395076bae768fca8, type: 3}
 --- !u!4 &955151111
 Transform:
   m_ObjectHideFlags: 0
@@ -401,7 +400,7 @@ Transform:
   m_GameObject: {fileID: 955151106}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14596999, y: 1, z: -1.0139401}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -419,44 +418,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca543140bbd67c49b65884e023faa37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::player_mvt
-  moveSpeed: 7
-  groundDrag: 5
-  jumpForce: 30
-  jumpCooldown: 0.25
+  walkSpeed: 5
+  sprintSpeed: 10
+  groundDrag: 2
+  jumpForce: 8
+  jumpCooldown: 0.28
   airMultiplier: 0.4
   jumpKey: 32
-  PlayerHeight: 1.6
+  sprintKey: 304
+  PlayerHeight: 1.7
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   orientation: {fileID: 1094520169}
---- !u!54 &955151113
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955151106}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 1
+  state: 0
 --- !u!1001 &986125918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -611,7 +586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124312872}
-  - component: {fileID: 1124312874}
+  - component: {fileID: 1124312873}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -628,7 +603,7 @@ Transform:
   m_GameObject: {fileID: 1124312870}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.20758, y: 0, z: 1.36749}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -636,19 +611,33 @@ Transform:
   - {fileID: 1094520169}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1124312874
-MonoBehaviour:
+--- !u!54 &1124312873
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124312870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc995be633bab7242964022e963a81e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  rb: {fileID: 0}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 48
+  m_CollisionDetection: 0
 --- !u!1 &1195531888
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,7 +839,7 @@ Transform:
   m_GameObject: {fileID: 1215162938}
   serializedVersion: 2
   m_LocalRotation: {x: 0.16090055, y: -0.0008602931, z: 0.00014024906, w: 0.98697025}
-  m_LocalPosition: {x: 0.35355, y: 4.45, z: -9.94645}
+  m_LocalPosition: {x: 0, y: 4.45, z: -10.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -976,7 +965,7 @@ GameObject:
   - component: {fileID: 1498150040}
   - component: {fileID: 1498150039}
   - component: {fileID: 1498150038}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1077,7 @@ GameObject:
   - component: {fileID: 1532254792}
   - component: {fileID: 1532254791}
   - component: {fileID: 1532254790}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1200,7 +1189,7 @@ GameObject:
   - component: {fileID: 1922584727}
   - component: {fileID: 1922584726}
   - component: {fileID: 1922584725}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1442,6 +1431,7 @@ GameObject:
   - component: {fileID: 2144163912}
   - component: {fileID: 2144163911}
   - component: {fileID: 2144163917}
+  - component: {fileID: 2144163918}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: Untagged
@@ -1547,7 +1537,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  Damping: {x: 0, y: 0}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -1567,8 +1557,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineOrbitalFollow
   TargetOffset: {x: 0, y: 1.2, z: -3.3}
   TrackerSettings:
-    BindingMode: 4
-    PositionDamping: {x: 1, y: 1, z: 1}
+    BindingMode: 3
+    PositionDamping: {x: 0, y: 0, z: 0}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
@@ -1632,7 +1622,7 @@ MonoBehaviour:
     Enabled: 0
     m_Value: 0
   OutputChannel: 1
-  StandbyUpdate: 2
+  StandbyUpdate: 1
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
@@ -1668,7 +1658,7 @@ Transform:
   m_GameObject: {fileID: 2144163910}
   serializedVersion: 2
   m_LocalRotation: {x: 0.16090053, y: -0.0008602931, z: 0.00014024902, w: 0.9869703}
-  m_LocalPosition: {x: 2.39301, y: 4.45, z: -3.04532}
+  m_LocalPosition: {x: 2.03946, y: 4.45, z: -3.39887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1691,6 +1681,36 @@ MonoBehaviour:
   playerObj: {fileID: 955151111}
   rb: {fileID: 0}
   rotationSpeed: 7
+--- !u!114 &2144163918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144163910}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDecollider
+  CameraRadius: 0.4
+  Decollision:
+    Enabled: 1
+    ObstacleLayers:
+      serializedVersion: 2
+      m_Bits: 128
+    UseFollowTarget:
+      Enabled: 0
+      YOffset: 0
+    Damping: 0.6
+    SmoothingTime: 0.1
+  TerrainResolution:
+    Enabled: 1
+    TerrainLayers:
+      serializedVersion: 2
+      m_Bits: 64
+    MaximumRaycast: 1
+    Damping: 0.6
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1699,6 +1719,7 @@ SceneRoots:
   - {fileID: 1195531892}
   - {fileID: 1979145962}
   - {fileID: 1124312872}
+  - {fileID: 1322551475}
   - {fileID: 1532254793}
   - {fileID: 1498150041}
   - {fileID: 1922584728}
@@ -1706,4 +1727,3 @@ SceneRoots:
   - {fileID: 986125918}
   - {fileID: 90720415}
   - {fileID: 1104163048}
-  - {fileID: 1322551475}
